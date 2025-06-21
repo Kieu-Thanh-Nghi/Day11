@@ -11,11 +11,30 @@ public class NewBehaviourScript : MonoBehaviour
     [SerializeField] int pagesCount;
     [SerializeField] int currentPages;
     [SerializeField] CreateLvlButtons clb;
+    [SerializeField] PageData pd;
+    bool isChangePage = false;
     // Start is called before the first frame update
     void Start()
     {
         pagesCount = maxLevel / levelsIn1Page + 1;
         currentPages = currentLevel / levelsIn1Page + 1;
         clb.create(levelsIn1Page, currentLevel, currentPages);
+    }
+
+    private void Update()
+    {
+        if (isChangePage)
+        {
+            isChangePage = !pd.changePage();
+            if (!isChangePage)
+            {
+                pd.DoneChange();
+            }
+        }
+    }
+
+    public void changePages()
+    {
+        isChangePage = true;
     }
 }

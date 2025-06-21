@@ -11,11 +11,6 @@ public class ButtonLvl : MonoBehaviour
     [SerializeField] Image Star3;
     [SerializeField] Sprite spStar1;
     [SerializeField] Sprite spStar2;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     public void changeTextLvl(int lvl)
     {
