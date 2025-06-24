@@ -617,8 +617,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tx: {fileID: 8803805123323279802}
-  Star1: {fileID: 8803805122423763492}
-  Star2: {fileID: 8803805122551215233}
-  Star3: {fileID: 8803805123184289499}
+  Star:
+  - {fileID: 8803805122423763492}
+  - {fileID: 8803805122551215233}
+  - {fileID: 8803805123184289499}
   spStar1: {fileID: 21300000, guid: d9197794070e389489fb690628b46532, type: 2}
   spStar2: {fileID: 21300050, guid: 027b6f4d318afd74bbb0417f0781860e, type: 3}

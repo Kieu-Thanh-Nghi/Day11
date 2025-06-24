@@ -5,27 +5,52 @@ using UnityEngine;
 public class PageData : MonoBehaviour
 {
     [SerializeField] Transform pinpoint1, pinpoint2, pinpoint3;
-    [SerializeField] GameObject LvlGroup1, LvlGroup2;
+    [SerializeField] CreateLvlGroup conten;
     [SerializeField] float speed = 10;
-    public bool changePage()
+    float currentSpeed;
+    Transform directPin;
+    GameObject newGroup;
+    GameObject CurrentGroup;
+    public GameObject ChangePage(GameObject currentGr, bool isNext, int levelsIn1Page, int currentLevel, int currentPages, int MaxLvl)
     {
-        if (LvlGroup1.transform.position == pinpoint1.position)
+        currentSpeed = speed;
+        CurrentGroup = currentGr;
+        newGroup = conten.createAGroup(levelsIn1Page, currentLevel, currentPages, MaxLvl).gameObject;
+        if (isNext)
         {
+            newGroup.transform.position = pinpoint3.position;
+            directPin = pinpoint1;
+        }
+        else
+        {
+            newGroup.transform.position = pinpoint1.position;
+            directPin = pinpoint3;
+        }
+        return newGroup;
+    }
+
+    public bool MovePages()
+    {
+        if (newGroup.transform.position == pinpoint2.position)
+        {
+            DoneChange();
             return true;
         }
         var step = speed * Time.deltaTime;
-        LvlGroup1.transform.position = Vector2.MoveTowards(
-            LvlGroup1.transform.position, pinpoint1.position, step);
-        LvlGroup2.transform.position = Vector2.MoveTowards(
-            LvlGroup2.transform.position, pinpoint2.position, step);
+        CurrentGroup.transform.position = Vector2.MoveTowards(
+            CurrentGroup.transform.position, directPin.position, step);
+        newGroup.transform.position = Vector2.MoveTowards(
+            newGroup.transform.position, pinpoint2.position, step);
         return false;
     }
 
     public void DoneChange()
     {
-        LvlGroup1.transform.position = pinpoint3.position;
-        GameObject temp = LvlGroup1;
-        LvlGroup1 = LvlGroup2;
-        LvlGroup2 = temp;
+        Destroy(CurrentGroup);
+    }
+
+    public void changeSpeed(int times)
+    {
+        currentSpeed = currentSpeed * times;
     }
 }
